@@ -29,7 +29,7 @@ export const options = {
 
                 let userRole = "Google User"
 
-                if(profile?.email == "hellowallaceww@gmail.com") {
+                if(profile?.email == "vxoweiwei@gmail.com") {
                     userRole = "admin";
                 }
 
