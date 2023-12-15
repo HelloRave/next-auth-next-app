@@ -10,7 +10,7 @@ const Nav = async () => {
         <div>My Site</div>
         <div className="flex gap-10">
           <Link href="/">Home</Link>
-          <Link href="/admin">Admin</Link>
+          <Link href="/admin">Create User</Link>
           <Link href="/client-member">Client Member</Link>
           <Link href="/member">Member</Link>
           <Link href="/public">Public</Link>

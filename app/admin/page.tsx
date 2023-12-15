@@ -1,5 +1,7 @@
+import UserForm from "@/components/UserForm";
+
 export default function AdminPage() {
     return (
-        <h1>Admin</h1>
+        <UserForm />
     )
 }
