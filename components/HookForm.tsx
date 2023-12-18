@@ -1,21 +1,9 @@
 'use client'
 
+import { registerUser } from "@/app/admin/actions";
+import { TSignupSchema, signUpSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
-import { z } from "zod";
-
-const signUpSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(6, 'Password at least 6 characters'),
-    confirmPassword: z.string(),
-}).refine(
-    (data) => data.password === data.confirmPassword, {
-        message: 'Passwords must match',
-        path: ['confirmPassword'],
-    }
-)
-
-type TSignupSchema = z.infer<typeof signUpSchema>;
 
 export default function HookForm() {
     const {
@@ -29,10 +17,19 @@ export default function HookForm() {
     });
 
     const onSubmit = handleSubmit(async data => {
-        await Promise.resolve(setTimeout(() => {
-            console.log(data)
-            reset();
-        }, 3000));
+        const result = await registerUser(data);
+
+        if (!result) {
+            console.log('Something went wrong');
+            return;
+        }
+
+        if (result.error) {
+            console.log(result.error);
+            return;
+        }
+
+        reset();
     })
 
     return (
