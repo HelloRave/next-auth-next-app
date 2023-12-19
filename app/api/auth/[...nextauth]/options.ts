@@ -37,6 +37,8 @@ export const options = {
                             foundUser.password = '';
                             return foundUser;
                         }
+                    } else {
+                        return null;
                     }
                 } catch (error) {
                     console.log(error)
