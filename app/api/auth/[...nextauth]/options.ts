@@ -1,11 +1,11 @@
+import { NextAuthOptions } from "next-auth";
 import GithubProviver from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { Provider } from "next-auth/providers/index";
 import bcrypt from "bcrypt";
 import { prisma } from "@/lib/prisma";
 
-export const options = {
+export const options: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: 'Credentials',
@@ -32,13 +32,13 @@ export const options = {
 
                         if (passwordMatch) {
                             console.log('Good match');
-
-                            foundUser['role'] = 'Unverified email';
-                            foundUser.password = '';
-                            return foundUser;
+                            return {
+                                id: foundUser.id,
+                                name: foundUser.name,
+                                email: foundUser.email,
+                                role: foundUser.role,
+                            };
                         }
-                    } else {
-                        return null;
                     }
                 } catch (error) {
                     console.log(error)
@@ -82,7 +82,7 @@ export const options = {
                 }
             }
         }),
-    ] as Provider[],
+    ],
     callbacks: {
         async jwt({ token, user }: any) {
             if (user) token.role = user.role
