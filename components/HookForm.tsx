@@ -17,6 +17,7 @@ export default function HookForm() {
     });
 
     const onSubmit = handleSubmit(async data => {
+        // Server actions
         const result = await registerUser(data);
 
         if (!result) {
@@ -34,6 +35,14 @@ export default function HookForm() {
 
     return (
         <form onSubmit={onSubmit} className="flex flex-col gap-3 w-1/2">
+            <input
+                {...register('name')}
+            />
+            {
+                errors.name && (
+                    <p className="text-red-500">{errors.name.message}</p>
+                )
+            }
             <input
                 {...register('email')}
             />
