@@ -22,14 +22,15 @@ export default function InputGroup<TFormValues extends FieldValues>({
                 {label}
             </label>
             <input
-                className="block mt-2 w-full rounded-md border-0 px-2.5 py-1.5 text-gray-900
-                    shadow-sm ring-1 ring-inset ring-gray-300"
+                className={`block mt-2 w-full rounded-md border-0 px-2.5 py-1.5 text-gray-900
+                    shadow-sm ring-1 ring-inset focus:outline-none
+                    ${errors[name] ? 'ring-pink-500 focus:border-pink-500 focus:ring-1 focus:ring-pink-500' : 'ring-gray-300 focus:border-green-500 focus:ring-1 focus:ring-green-500'}`}
                 {...props}
                 {...register(name, rules)}
             />
             {
                 errors[name] && (
-                    <p className="text-red-500">{errors[name].message}</p>
+                    <p className="text-pink-500">{errors[name].message}</p>
                 )
             }
         </Fragment>

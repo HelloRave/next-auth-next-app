@@ -10,11 +10,11 @@ export default function HookForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting, isValid },
         reset,
-        getValues,
     } = useForm<TSignupSchema>({
-        resolver: zodResolver(signUpSchema)
+        mode: 'onTouched',
+        resolver: zodResolver(signUpSchema),
     });
 
     const onSubmit = handleSubmit(async data => {
@@ -73,9 +73,10 @@ export default function HookForm() {
                 />
             </div>
             <button
-                disabled={isSubmitting}
+                disabled={!isValid || isSubmitting}
                 type="submit"
-                className="bg-indigo-600 mt-10 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm 
+                className="bg-indigo-600 mt-10 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm
+                disabled:bg-slate-300
                 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 rounded"
             >
                 Submit
