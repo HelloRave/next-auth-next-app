@@ -1,16 +1,15 @@
 import HookForm from "@/components/HookForm";
+import RegisterForm from "@/components/RegisterForm";
 
 export default function AdminPage() {
     return (
-        <div className="flex flex-col min-h-full justify-center">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="mt-10 text-center text-2xl font-bold text-gray-900">
-                    Sign up for an account
-                </h2>
-            </div>
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="min-h-full flex justify-center my-10">
+            <RegisterForm 
+                title="Sign up for an account" 
+                className="w-1/2 py-10 shadow-md rounded bg-white"
+            >
                 <HookForm />
-            </div>
+            </RegisterForm>
         </div>
     )
 }
