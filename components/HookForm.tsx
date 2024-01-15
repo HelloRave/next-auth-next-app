@@ -1,10 +1,14 @@
 'use client'
 
+import Image from "next/image";
+import { useForm } from "react-hook-form"
+
 import { registerUser } from "@/app/admin/actions";
 import { TSignupSchema, signUpSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form"
 import InputGroup from "./InputGroup";
+import SocialButton from "./SocialButton";
+import { gitHubIcon, googleIcon } from "@/public/icons";
 
 export default function HookForm() {
     const {
@@ -37,7 +41,7 @@ export default function HookForm() {
     return (
         <form onSubmit={onSubmit} className="flex flex-col gap-3">
             <div>
-                <InputGroup<TSignupSchema> 
+                <InputGroup<TSignupSchema>
                     label="Name"
                     name="name"
                     type="text"
@@ -46,7 +50,7 @@ export default function HookForm() {
                 />
             </div>
             <div>
-                <InputGroup<TSignupSchema> 
+                <InputGroup<TSignupSchema>
                     label="Email"
                     name="email"
                     type="email"
@@ -55,7 +59,7 @@ export default function HookForm() {
                 />
             </div>
             <div>
-                <InputGroup<TSignupSchema> 
+                <InputGroup<TSignupSchema>
                     label="Password"
                     name="password"
                     type="password"
@@ -64,7 +68,7 @@ export default function HookForm() {
                 />
             </div>
             <div>
-                <InputGroup<TSignupSchema> 
+                <InputGroup<TSignupSchema>
                     label="Confirm Password"
                     name="confirmPassword"
                     type="password"
@@ -81,6 +85,32 @@ export default function HookForm() {
             >
                 Submit
             </button>
+            <SocialButton
+                title="Sign in with GitHub"
+                type="button"
+                className="bg-black text-white hover:opacity-75"
+            >
+                <Image
+                    priority
+                    src={gitHubIcon}
+                    width={24}
+                    height={24}
+                    alt="github icon"
+                />
+            </SocialButton>
+            <SocialButton
+                title="Sign in with Google"
+                type="button"
+                className="bg-white text-black hover:opacity-75"
+            >
+                <Image
+                    priority
+                    src={googleIcon}
+                    width={24}
+                    height={24}
+                    alt="google icon"
+                />
+            </SocialButton>
         </form>
     )
 }
