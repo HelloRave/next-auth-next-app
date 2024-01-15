@@ -1,15 +1,15 @@
-import HookForm from "@/components/HookForm";
-import RegisterForm from "@/components/RegisterForm";
+import RegisterHookForm from "@/components/RegisterHookForm";
+import FormCard from "@/components/FormCard";
 
 export default function AdminPage() {
     return (
         <div className="min-h-full flex justify-center my-10">
-            <RegisterForm 
-                title="Sign up for an account" 
+            <FormCard
+                title="Sign up for an account"
                 className="w-1/2 py-10 shadow-md rounded bg-white"
             >
-                <HookForm />
-            </RegisterForm>
+                <RegisterHookForm />
+            </FormCard>
         </div>
     )
 }

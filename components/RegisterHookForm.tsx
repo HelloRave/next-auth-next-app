@@ -10,7 +10,7 @@ import InputGroup from "./InputGroup";
 import SocialButton from "./SocialButton";
 import { gitHubIcon, googleIcon } from "@/public/icons";
 
-export default function HookForm() {
+export default function RegisterHookForm() {
     const {
         register,
         handleSubmit,
@@ -86,7 +86,7 @@ export default function HookForm() {
                 Submit
             </button>
             <SocialButton
-                title="Sign in with GitHub"
+                title="Continue with GitHub"
                 type="button"
                 className="bg-black text-white hover:opacity-75"
             >
@@ -99,7 +99,7 @@ export default function HookForm() {
                 />
             </SocialButton>
             <SocialButton
-                title="Sign in with Google"
+                title="Continue with Google"
                 type="button"
                 className="bg-white text-black hover:opacity-75"
             >
