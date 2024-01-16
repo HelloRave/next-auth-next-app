@@ -10,6 +10,7 @@
     "migrate:postgres": "dotenv -e .env.local -- npx prisma migrate dev"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.2",
     "@prisma/client": "^5.7.1",
     "bcrypt": "^5.1.1",
