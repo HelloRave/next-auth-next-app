@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { UserIcon } from "@heroicons/react/24/solid";
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -73,6 +74,12 @@ export default function Nav({
               Profile
             </div>
             <div className="relative ml-3">
+              <div>
+                <button className="p-1 rounded-full bg-gray-50">
+                  <span className="sr-only">Open user menu</span>
+                  <UserIcon className="h-8 w-8 rounded-full" />
+                </button>
+              </div>
               { children }
             </div>
           </div>
