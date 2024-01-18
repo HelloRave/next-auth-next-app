@@ -1,4 +1,5 @@
 import FormCard from "@/components/FormCard";
+import LoginHookForm from "@/components/LoginHookForm";
 import SocialButton from "@/components/SocialButton";
 import { GoogleIcon, GithubIcon } from "@/public/icons";
 import Link from "next/link";
@@ -10,7 +11,8 @@ export default function LoginPage() {
                 title="Login"
                 className="w-1/2 py-10 shadow-md rounded bg-white"
             >
-                <div className="flex flex-col gap-3 items-center">
+                <LoginHookForm />
+                <div className="flex flex-col gap-3 items-center mt-5">
                     <SocialButton
                         title="Continue with GitHub"
                         type="button"
