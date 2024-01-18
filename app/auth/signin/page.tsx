@@ -1,6 +1,7 @@
 import FormCard from "@/components/FormCard";
 import SocialButton from "@/components/SocialButton";
 import { GoogleIcon, GithubIcon } from "@/public/icons";
+import Link from "next/link";
 
 export default function LoginPage() {
     return (
@@ -28,6 +29,18 @@ export default function LoginPage() {
                     >
                         <GoogleIcon />
                     </SocialButton>
+                </div>
+                <div className="mt-5">
+                    <p className="text-center">
+                        {
+                            `New user? Register `
+                        }
+                        <Link href={'/auth/register'}
+                            className="underline"
+                        >
+                            here
+                        </Link>
+                    </p>
                 </div>
             </FormCard>
         </div>
