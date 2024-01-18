@@ -1,11 +1,6 @@
-'use client'
-
-import { signIn } from "next-auth/react";
-import Image from "next/image";
-
 import FormCard from "@/components/FormCard";
 import SocialButton from "@/components/SocialButton";
-import { gitHubIcon, googleIcon } from "@/public/icons";
+import { GoogleIcon, GithubIcon } from "@/public/icons";
 
 export default function LoginPage() {
     return (
@@ -19,33 +14,19 @@ export default function LoginPage() {
                         title="Continue with GitHub"
                         type="button"
                         className="bg-black text-white hover:opacity-75"
-                        onClick={() => signIn("github", {
-                            callbackUrl: '/'
-                        })}
+                        provider="github"
+                        callbackurl="/"
                     >
-                        <Image
-                            priority
-                            src={gitHubIcon}
-                            width={24}
-                            height={24}
-                            alt="github icon"
-                        />
+                        <GithubIcon />
                     </SocialButton>
                     <SocialButton
                         title="Continue with Google"
                         type="button"
                         className="bg-white text-black hover:opacity-75"
-                        onClick={() => signIn("google", {
-                            callbackUrl: '/'
-                        })}
+                        provider="google"
+                        callbackurl="/"
                     >
-                        <Image
-                            priority
-                            src={googleIcon}
-                            width={24}
-                            height={24}
-                            alt="google icon"
-                        />
+                        <GoogleIcon />
                     </SocialButton>
                 </div>
             </FormCard>

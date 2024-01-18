@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import { useForm } from "react-hook-form"
 
 import { registerUser } from "@/app/admin/actions";
@@ -8,7 +7,7 @@ import { TSignupSchema, signUpSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputGroup from "./InputGroup";
 import SocialButton from "./SocialButton";
-import { gitHubIcon, googleIcon } from "@/public/icons";
+import { GithubIcon, GoogleIcon } from "@/public/icons";
 
 export default function RegisterHookForm() {
     const {
@@ -89,27 +88,19 @@ export default function RegisterHookForm() {
                 title="Continue with GitHub"
                 type="button"
                 className="bg-black text-white hover:opacity-75"
+                provider="github"
+                callbackurl="/"
             >
-                <Image
-                    priority
-                    src={gitHubIcon}
-                    width={24}
-                    height={24}
-                    alt="github icon"
-                />
+                <GithubIcon />
             </SocialButton>
             <SocialButton
                 title="Continue with Google"
                 type="button"
                 className="bg-white text-black hover:opacity-75"
+                provider="google"
+                callbackurl="/"
             >
-                <Image
-                    priority
-                    src={googleIcon}
-                    width={24}
-                    height={24}
-                    alt="google icon"
-                />
+                <GoogleIcon />
             </SocialButton>
         </form>
     )
