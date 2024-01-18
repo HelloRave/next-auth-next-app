@@ -1,6 +1,6 @@
-import * as googleIcon from './google.svg';
-import * as gitHubIcon from './github.svg';
+import GoogleIcon from './google';
+import GithubIcon from './github';
 
 export {
-    googleIcon, gitHubIcon,
+    GoogleIcon, GithubIcon,
 }
