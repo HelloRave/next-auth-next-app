@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Nav from '@/components/Nav'
 import { AuthProvider } from '@/components/AuthProvider'
-import LoginState from '@/components/LoginState'
 
 
 export const metadata: Metadata = {
@@ -18,11 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gray-100">
-        <Nav>
-          <LoginState />
-        </Nav>
         <AuthProvider>
-          { children }
+          <Nav />
+          {children}
         </AuthProvider>
       </body>
     </html>

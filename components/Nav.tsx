@@ -5,6 +5,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { UserIcon } from "@heroicons/react/24/solid";
+import { Menu, Transition } from "@headlessui/react";
+import { useSession } from "next-auth/react";
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -12,11 +14,8 @@ const navigation = [
   { name: 'Public', href: '/public' },
 ];
 
-export default function Nav({
-  children
-}: {
-  readonly children: React.ReactNode
-}) {
+export default function Nav() {
+  const { data } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -31,7 +30,7 @@ export default function Nav({
               onClick={() => setIsOpen((prev) => !prev)}
             >
               <span className="sr-only">Open main menu</span>
-              <Bars3Icon 
+              <Bars3Icon
                 className={`h-6 w-6 ${isOpen ? 'hidden' : 'block'}`}
                 aria-hidden="true"
               />
@@ -71,16 +70,57 @@ export default function Nav({
           {/* Profile */}
           <div className="absolute right-0 inset-y-0 flex items-center">
             <div>
-              Profile
+              Search/Alert
             </div>
             <div className="relative ml-3">
-              <div>
-                <button className="p-1 rounded-full bg-gray-50">
-                  <span className="sr-only">Open user menu</span>
-                  <UserIcon className="h-8 w-8 rounded-full" />
-                </button>
-              </div>
-              { children }
+              {
+                data ? 
+
+                <Menu>
+                  <Menu.Button className="p-1 rounded-full bg-gray-50">
+                    <span className="sr-only">Open user menu</span>
+                    <UserIcon className="h-8 w-8 rounded-full" />
+                  </Menu.Button>
+                  <Transition
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items
+                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg"
+                    >
+                      <Menu.Item as="div">
+                          {({ active }) => (
+                            <span
+                              className={`block px-4 py-2 text-sm text-gray-700 ${active ? "bg-gray-100" : ""}`}
+                            >
+                              Profile
+                            </span>
+                          )}
+                      </Menu.Item>
+                      <Menu.Item as="a">
+                          {({ active }) => (
+                            <Link href={{
+                              pathname: '/api/auth/signout',
+                              query: { callbackUrl: '/' },
+                            }}
+                              className={`block px-4 py-2 text-sm text-gray-700 ${active ? "bg-gray-100" : ""}`}
+                            >
+                              Logout
+                            </Link>
+                          )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+
+                :
+
+                <Link href="/api/auth/signin">Login</Link>
+              }
             </div>
           </div>
         </div>
@@ -90,7 +130,7 @@ export default function Nav({
         {
           navigation.map((page) => {
             return (
-              <Link 
+              <Link
                 key={page.name}
                 href={page.href}
                 className={`
