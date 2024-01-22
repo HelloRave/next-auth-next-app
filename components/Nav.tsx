@@ -101,7 +101,7 @@ export default function Nav() {
                             </span>
                           )}
                       </Menu.Item>
-                      <Menu.Item as="a">
+                      <Menu.Item>
                           {({ active }) => (
                             <Link href={{
                               pathname: '/api/auth/signout',

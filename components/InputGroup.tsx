@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { DetailedHTMLProps, Fragment, InputHTMLAttributes } from "react";
 import {
     DeepMap, FieldError, FieldValues, Path, RegisterOptions, UseFormRegister
 } from "react-hook-form";
@@ -9,9 +9,7 @@ export type FormInputProps<TFormValues extends FieldValues> = {
     readonly register: UseFormRegister<TFormValues>;
     readonly errors?: Partial<DeepMap<TFormValues, FieldError>>;
     readonly rules?: RegisterOptions;
-} & {
-    readonly type: string;
-}
+} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 export default function InputGroup<TFormValues extends FieldValues>({
     label, name, register, errors, rules, ...props
