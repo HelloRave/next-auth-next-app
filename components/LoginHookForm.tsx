@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
-import { useRouter } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import InputGroup from "./InputGroup"
 
 type TLoginSchema = {
@@ -14,32 +14,19 @@ export default function LoginHookForm() {
     const {
         register,
         handleSubmit,
-        formState: { isSubmitting, isValid, errors },
-        setError,
+        formState: { isSubmitting, isValid },
         reset
     } = useForm<TLoginSchema>();
 
-    const router = useRouter();
+    const searchParams = useSearchParams();
 
     const onSubmit = handleSubmit(async data => {
-        const response = await signIn("credentials", {
+        await signIn("credentials", {
             email: data.email, password: data.password,
-            redirect: false,
+            callbackUrl: `${searchParams.get('callbackUrl') ?? undefined}/`,
         });
 
         reset();
-
-        if (response?.ok) {
-            router.push('/');
-        } else if (response?.status === 401) {
-            setError("root.invalidCredentials", {
-                message: 'Invalid Credentials'
-            });
-        } else {
-            setError("root.serverError", {
-                message: 'Internal server error'
-            });
-        }
     });
 
     const emailValidation = {
@@ -68,9 +55,9 @@ export default function LoginHookForm() {
                 />
             </div>
             {
-                errors?.root?.invalidCredentials &&
+                searchParams.get('error') === 'CredentialsSignin' &&
                 <p className="text-pink-500">
-                    {errors?.root?.invalidCredentials.message}
+                    Invalid Credentials
                 </p>
             }
             <button
