@@ -57,7 +57,7 @@ export const options: NextAuthOptions = {
 
                 let userRole = "GitHub User"
 
-                if(profile?.email == "huang.weiwei@trentglobal.edu.sg") {
+                if(profile?.email == "vxoweiwei@gmail.com") {
                     userRole = "admin";
                 }
 
